@@ -6,6 +6,7 @@ import example.FormalParameterVisitor;
 import example.IfVisitor;
 import example.declVisitor;
 import example.globalVarVisitor;
+import example.havocStmtVisitor;
 import example.assignStmtVisitor;
 
 
@@ -28,6 +29,8 @@ public class VCGenerator {
 	private ProgramContext progc;
 	private StringBuilder result;
 	private static String GlobalRes;
+	//private havocStmtVisitor havocStmtVis;
+	
 	public VCGenerator(ProgramContext progc,ProcedureDeclContext proc) {
 		this.proc = proc;
 		this.progc = progc;
@@ -52,7 +55,9 @@ public class VCGenerator {
 		Var = assignStmtVis.getMap();
 		assertStmtVis = new assertStmtVisitor(Var);
 		ifVisitor = new IfVisitor(Var);
+		//havocStmtVis = new havocStmtVisitor(Var);
 		result = new StringBuilder("(set-logic QF_NIA)\n");
+		
 	}
 	public StringBuilder generateVC() {
 			declVis.visit(proc);
@@ -60,6 +65,7 @@ public class VCGenerator {
 			fpv.visit(proc);
 			assignStmtVis.visit(proc);
 			assertStmtVis.visit(proc);
+			//havocStmtVis.visit(proc);
 			ifVisitor.visit(proc);
 			result.append(fpv.getFormalParameterResult().toString());
 			for(int i = 0 ; i<declVis.getIDArray().size() ; i++){
@@ -67,6 +73,7 @@ public class VCGenerator {
 				result.append(s);
 			}
 			result.append(assignStmtVis.getdecla());
+			//result.append(havocStmtVis.getdecla());
 			result.append(assignStmtVis.getassignStmt());
 			String assertexpr  = null;
 			for(int i = 0 ; i < assertStmtVis.getassertExpr().size() ; i++){

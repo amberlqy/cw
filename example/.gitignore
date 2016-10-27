@@ -4,3 +4,4 @@
 /assertStmtVisitor.class
 /assignStmtVisitor.class
 /globalVarVisitor.class
+/havocStmtVisitor.class

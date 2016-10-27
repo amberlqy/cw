@@ -23,7 +23,7 @@ public class SRTool {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		// String filename = args[0];
-		String filename = "tests/correct/divzero.c";
+		String filename = "tests/correct/simpleeq.c";
 //		 String filename = "tool/del.c";
 		ANTLRInputStream input = new ANTLRInputStream(new FileInputStream(filename));
 		SimpleCLexer lexer = new SimpleCLexer(input);
